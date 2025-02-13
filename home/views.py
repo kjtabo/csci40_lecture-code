@@ -9,12 +9,6 @@ def index(request):
 
 def task_list(request):
     ctx = {
-        "tasks": [
-            'Task 1',
-            'Task 2',
-            'Task 3',
-            'Task 4',
-            'Task 5',
-        ]
+        "tasks": ["shikanokonokonokonoshitantan" for i in range(1000)]
     }
     return render(request, 'task_list.html', ctx)
