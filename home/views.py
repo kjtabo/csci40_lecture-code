@@ -12,3 +12,6 @@ def task_list(request):
         "tasks": ["shikanokonokonokonoshitantan" for i in range(1000)]
     }
     return render(request, 'task_list.html', ctx)
+
+def task_detail(request, pk):
+    return pk
