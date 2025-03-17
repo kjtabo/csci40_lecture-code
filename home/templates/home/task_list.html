@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Task List{% endblock %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1>Hello {{ request.user.username }}</h1>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href={% url 'login' %}>Login</a>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="task_name">
+            <span>Take Name</span>
+            <input type="text" id="task_name" name="task_name">
+        </label>
+        <label for="task_due">
+            <span>Due Date</span>
+            <input type="datetime-local" id="task_due" name="task_due">
+        </label>
+        <select id="taskgroup" name="taskgroup">
+            {% for group in taskgroups %}
+            <option value="{{ group.pk }}">{{ group.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <ul>
+        {% for task in object_list %}
+            <li>
+                <a href="{{ task.get_absolute_url }}">
+                {{ task }} </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

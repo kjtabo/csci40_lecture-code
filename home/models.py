@@ -19,6 +19,9 @@ class Task(models.Model):
         related_name="task_list"
     )
 
+    def __str__(self):
+        return f"{self.name}, due on {self.due_date}"
+
     def get_absolute_url(self):
         return reverse("home:task-detail", kwargs={"pk": self.pk})
      
